@@ -280,30 +280,26 @@ services:
     project_id: prj_01M0EXKVJPEEQ3HBQ2G93VG38N
     source: !Compose
       content: |
-        version: "3.8"
-
         services:
-          rustfs:
+          rp_s3:
             image: rustfs/rustfs:latest
-            volumes:
-              - rustfs-data:/data
-            environment:
-              - RUSTFS_ACCESS_KEY
-              - RUSTFS_SECRET_KEY
-              - RUSTFS_ADDRESS=0.0.0.0:9000
-              - RUSTFS_CONSOLE_ADDRESS=0.0.0.0:9001
-              - RUSTFS_CONSOLE_ENABLE=true
-              - RUSTFS_CORS_ALLOWED_ORIGINS=*
-              - RUSTFS_CONSOLE_CORS_ALLOWED_ORIGINS=*
-            command: /data
             restart: unless-stopped
+            environment:
+              RUSTFS_ACCESS_KEY: ${RUSTFS_ACCESS_KEY}
+              RUSTFS_SECRET_KEY: ${RUSTFS_SECRET_KEY}
+              RUSTFS_ADDRESS: 0.0.0.0:9000
+              RUSTFS_CONSOLE_ADDRESS: 0.0.0.0:9001
+              RUSTFS_CONSOLE_ENABLE: "true"
+            volumes:
+              - rustfsdata:/data
+            command: /data
 
         volumes:
-          rustfs-data:
+          rustfsdata:
       ingress_service: null
-    port: 9001
+    port: 9000
     host_port: null
-    domain: app-2f46e70a.example.com
+    domain: null
     tls_enabled: false
     env_vars:
     - key: RUSTFS_ACCESS_KEY
@@ -324,7 +320,7 @@ services:
       mem_limit_bytes: 0
     run_command: null
     run_args: []
-    db_kind: null
+    db_kind: rustfs
     domains: []
     pre_deploy_job_id: null
     pre_deploy_job_ids: []
