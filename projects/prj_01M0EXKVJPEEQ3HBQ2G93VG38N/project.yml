@@ -103,7 +103,7 @@ services:
     tls_enabled: false
     env_vars:
     - key: APP_BASE_URL
-      value: !Plain https://CHANGE_ME
+      value: !Plain https://api.chiquitos.tech
     env_comments: []
     volumes: []
     healthcheck:
