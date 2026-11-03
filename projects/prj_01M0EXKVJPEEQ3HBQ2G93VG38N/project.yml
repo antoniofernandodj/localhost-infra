@@ -483,7 +483,7 @@ jobs:
     services:
       diag:
         image: docker.io/library/busybox
-        command: ["sh", "-c", "for h in rp_s3 rp_db rp_cache rp_broker s3 db; do printf '%s -> ' $$h; getent hosts $$h || echo NAO_RESOLVE; done; cat /etc/resolv.conf"]
+        command: ["sh", "-c", "for h in rp_s3 rp_db rp_cache rp_broker rp-s3; do echo \"== $$h\"; nslookup $$h 2>&1 | tail -3; done; ip -4 addr | grep inet"]
   main_service: diag
   enabled: true
   created_at: 2026-11-03T19:14:45.050949191Z
