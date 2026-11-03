@@ -476,6 +476,17 @@ jobs:
   main_service: bucket
   enabled: true
   created_at: 2026-11-03T19:11:19.271472008Z
+- id: job_01M6HDBN5T1A4Q0JS8N2YBXHY5
+  trigger_service_id: svc_01M6GVWREEVG10460NC4HHBXEY
+  name: diag-dns-temporario
+  compose: |
+    services:
+      diag:
+        image: docker.io/library/busybox
+        command: ["sh", "-c", "for h in rp_s3 rp_db rp_cache rp_broker s3 db; do printf '%s -> ' $$h; getent hosts $$h || echo NAO_RESOLVE; done; cat /etc/resolv.conf"]
+  main_service: diag
+  enabled: true
+  created_at: 2026-11-03T19:14:45.050949191Z
 secrets:
 - id: sec_01M6GTKDTREDVXN5ZTF43KXJNQ
   key: ASAAS_API_KEY
