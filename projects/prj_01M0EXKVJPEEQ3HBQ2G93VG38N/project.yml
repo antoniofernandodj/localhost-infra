@@ -390,8 +390,18 @@ services:
   spec:
     name: ui
     project_id: prj_01M0EXKVJPEEQ3HBQ2G93VG38N
-    source: !Registry
-      image: ''
+    source: !Git
+      url: https://github.com/antoniofernandodj/chickie-ui.git
+      branch: main
+      root_path: .
+      watch_paths: []
+      submodules: false
+      dockerfile_path: Dockerfile
+      build_context: .
+      build_stage: null
+      credentials: null
+      username: null
+      provider_id: gp_01M6GZF068WC9YN2J2S1FAHX6F
     port: 80
     host_port: null
     domain: null
