@@ -485,7 +485,7 @@ jobs:
   name: migrations
   compose: ''
   git_source:
-    provider_id: gp_01M6GT0FXENWJD23BAK5QAN3NZ
+    provider_id: gp_01M6GZF068WC9YN2J2S1FAHX6F
     url: https://github.com/antoniofernandodj/chickie.git
     branch: deploy/api
     username: null
