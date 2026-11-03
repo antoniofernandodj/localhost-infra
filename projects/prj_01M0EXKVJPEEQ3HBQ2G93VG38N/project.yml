@@ -413,7 +413,7 @@ services:
     run_args: []
     db_kind: null
     domains:
-    - domain: https://app.chiquitos.tech
+    - domain: app.chiquitos.tech
       port: null
       tls: true
     pre_deploy_job_id: null
