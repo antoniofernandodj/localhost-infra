@@ -118,7 +118,8 @@ services:
     db_kind: null
     domains: []
     pre_deploy_job_id: null
-    pre_deploy_job_ids: []
+    pre_deploy_job_ids:
+    - job_01M6HD5C77G605JF3AP7C0TJFT
     depends_on:
     - svc_01M6EMRN1MDTARE52AQEMQVHRX
     - svc_01M0EXTN8TCQXY4N7P5AS15M7H
