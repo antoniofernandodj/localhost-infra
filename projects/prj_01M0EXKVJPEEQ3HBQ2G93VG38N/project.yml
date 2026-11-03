@@ -476,17 +476,6 @@ jobs:
   main_service: bucket
   enabled: true
   created_at: 2026-11-03T19:11:19.271472008Z
-- id: job_01M6HDS6RNQZAYT4Z5VVE56EBN
-  trigger_service_id: svc_01M6GVWREEVG10460NC4HHBXEY
-  name: diag-rede-temporario
-  compose: |
-    services:
-      diag:
-        image: docker.io/library/busybox
-        command: ["sh", "-c", "for h in rp_s3 rp_db rp_cache rp_broker; do printf '%s -> ' $$h; nslookup $$h 2>&1 | grep -A1 '^Name' | grep Address | head -1 || echo FALHOU; done; echo '== externo'; nslookup example.com 2>&1 | grep -c Address; nc -z -w4 1.1.1.1 443 && echo EGRESS_TCP_OK || echo EGRESS_TCP_FALHOU; nc -z -w4 rp_db 5432 && echo DB_5432_OK || echo DB_5432_FALHOU; nc -z -w4 rp_cache 6379 && echo CACHE_OK || echo CACHE_FALHOU; nc -z -w4 rp_broker 5672 && echo BROKER_OK || echo BROKER_FALHOU; nc -z -w4 rp_s3 9000 && echo S3_OK || echo S3_FALHOU"]
-  main_service: diag
-  enabled: true
-  created_at: 2026-11-03T19:22:09.045467132Z
 secrets:
 - id: sec_01M6GTKDTREDVXN5ZTF43KXJNQ
   key: ASAAS_API_KEY
