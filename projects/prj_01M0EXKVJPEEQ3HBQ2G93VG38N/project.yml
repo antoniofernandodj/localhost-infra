@@ -7,6 +7,10 @@ env_vars:
   value: !Plain postgres
 - key: POSTGRES_DB
   value: !Plain db
+- key: POSTGRES_HOST
+  value: !Plain rp_db
+- key: POSTGRES_PORT
+  value: !Plain '5432'
 - key: MODE
   value: !Plain production
 - key: RUST_LOG
@@ -17,38 +21,38 @@ env_vars:
   value: !Plain CHANGE_ME@example.com
 - key: FRONTEND_BASE_URL
   value: !Plain https://CHANGE_ME
-- key: DATABASE_URL
-  value: !Secret DATABASE_URL
 - key: JWT_SECRET
   value: !Secret JWT_SECRET
-- key: RABBITMQ_URL
-  value: !Secret RABBITMQ_URL
 - key: RABBITMQ_HOST
   value: !Plain rp_broker
 - key: RABBITMQ_PORT
   value: !Plain '5672'
 - key: RABBITMQ_USER
-  value: !Plain CHANGE_ME
+  value: !Plain rabbit
 - key: RABBITMQ_PASS
-  value: !Secret RABBITMQ_PASS
+  value: !Secret RABBITMQ_DEFAULT_PASS
 - key: RABBITMQ_VHOST
   value: !Plain /
 - key: RABBITMQ_EXCHANGE
   value: !Plain chickie_exchange
-- key: REDIS_URL
-  value: !Plain redis://rp_cache:6379
+- key: REDIS_HOST
+  value: !Plain rp_cache
+- key: REDIS_PORT
+  value: !Plain '6379'
+- key: REDIS_PASSWORD
+  value: !Secret REDIS_PASSWORD
 - key: S3_ENDPOINT
-  value: !Plain https://CHANGE_ME
+  value: !Plain http://rp_s3:9000
 - key: S3_REGION
   value: !Plain us-east-1
 - key: S3_BUCKET_NAME_1
-  value: !Plain CHANGE_ME
+  value: !Plain chickie-uploads
 - key: S3_PUBLIC_URL
   value: !Plain https://CHANGE_ME
 - key: S3_ACCESS_KEY_ID
-  value: !Secret S3_ACCESS_KEY_ID
+  value: !Secret RUSTFS_ACCESS_KEY
 - key: S3_SECRET_ACCESS_KEY
-  value: !Secret S3_SECRET_ACCESS_KEY
+  value: !Secret RUSTFS_SECRET_KEY
 - key: SMTP_SERVER
   value: !Plain CHANGE_ME
 - key: SMTP_PORT
