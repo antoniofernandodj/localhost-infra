@@ -409,7 +409,10 @@ services:
     run_command: null
     run_args: []
     db_kind: null
-    domains: []
+    domains:
+    - domain: https://app.chiquitos.tech
+      port: null
+      tls: true
     pre_deploy_job_id: null
     pre_deploy_job_ids: []
     depends_on:
