@@ -119,7 +119,10 @@ services:
     run_command: null
     run_args: []
     db_kind: null
-    domains: []
+    domains:
+    - domain: api.chiquitos.tech
+      port: null
+      tls: true
     pre_deploy_job_id: null
     pre_deploy_job_ids:
     - job_01M6HFD00XFEWM70XWBJA9JBKD
