@@ -1,0 +1,514 @@
+id: prj_01M0EXKVJPEEQ3HBQ2G93VG38N
+name: Chiquitos
+env_vars:
+- key: POSTGRES_PASSWORD
+  value: !Secret POSTGRES_PASSWORD
+- key: POSTGRES_USER
+  value: !Plain postgres
+- key: POSTGRES_DB
+  value: !Plain db
+- key: MODE
+  value: !Plain production
+- key: RUST_LOG
+  value: !Plain info
+- key: APP_PORT
+  value: !Plain '3000'
+- key: OWNER_EMAIL
+  value: !Plain CHANGE_ME@example.com
+- key: FRONTEND_BASE_URL
+  value: !Plain https://CHANGE_ME
+- key: DATABASE_URL
+  value: !Secret DATABASE_URL
+- key: JWT_SECRET
+  value: !Secret JWT_SECRET
+- key: RABBITMQ_URL
+  value: !Secret RABBITMQ_URL
+- key: RABBITMQ_HOST
+  value: !Plain rp_broker
+- key: RABBITMQ_PORT
+  value: !Plain '5672'
+- key: RABBITMQ_USER
+  value: !Plain CHANGE_ME
+- key: RABBITMQ_PASS
+  value: !Secret RABBITMQ_PASS
+- key: RABBITMQ_VHOST
+  value: !Plain /
+- key: RABBITMQ_EXCHANGE
+  value: !Plain chickie_exchange
+- key: REDIS_URL
+  value: !Plain redis://rp_cache:6379
+- key: S3_ENDPOINT
+  value: !Plain https://CHANGE_ME
+- key: S3_REGION
+  value: !Plain us-east-1
+- key: S3_BUCKET_NAME_1
+  value: !Plain CHANGE_ME
+- key: S3_PUBLIC_URL
+  value: !Plain https://CHANGE_ME
+- key: S3_ACCESS_KEY_ID
+  value: !Secret S3_ACCESS_KEY_ID
+- key: S3_SECRET_ACCESS_KEY
+  value: !Secret S3_SECRET_ACCESS_KEY
+- key: SMTP_SERVER
+  value: !Plain CHANGE_ME
+- key: SMTP_PORT
+  value: !Plain '587'
+- key: SMTP_NAME
+  value: !Plain Chickie
+- key: SMTP_USER
+  value: !Plain CHANGE_ME
+- key: SMTP_PASS
+  value: !Secret SMTP_PASS
+- key: ASAAS_BASE_URL
+  value: !Plain https://CHANGE_ME
+- key: ASAAS_API_KEY
+  value: !Secret ASAAS_API_KEY
+- key: TOKEN_DE_AUTENTICACAO_ASAAS
+  value: !Secret TOKEN_DE_AUTENTICACAO_ASAAS
+- key: VAPID_PUBLIC_KEY
+  value: !Secret VAPID_PUBLIC_KEY
+- key: VAPID_PRIVATE_KEY
+  value: !Secret VAPID_PRIVATE_KEY
+- key: VAPID_SUBJECT
+  value: !Plain mailto:CHANGE_ME@example.com
+network_name: rp_net_01M0EXKV
+created_at: 2026-08-20T06:26:56.726606542Z
+services:
+- id: svc_01M0EXSQ24SZ2P5N6B2J3G93MB
+  spec:
+    name: api
+    project_id: prj_01M0EXKVJPEEQ3HBQ2G93VG38N
+    source: !Git
+      url: https://github.com/antoniofernandodj/chickie.git
+      branch: main-api
+      root_path: .
+      watch_paths: []
+      submodules: false
+      dockerfile_path: dockerfiles/api.dockerfile
+      build_context: .
+      build_stage: null
+      credentials: null
+      username: null
+      provider_id: gp_01M6GT0FXENWJD23BAK5QAN3NZ
+    port: 3000
+    host_port: null
+    domain: null
+    tls_enabled: false
+    env_vars:
+    - key: APP_BASE_URL
+      value: !Plain https://CHANGE_ME
+    env_comments: []
+    volumes: []
+    healthcheck:
+      kind: Tcp
+      interval_secs: 5
+      timeout_secs: 3
+      retries: 10
+      start_period_secs: 5
+    replicas: 1
+    resources:
+      cpu_shares: 0
+      mem_limit_bytes: 0
+    run_command: null
+    run_args: []
+    db_kind: null
+    domains: []
+    pre_deploy_job_id: null
+    pre_deploy_job_ids: []
+    depends_on:
+    - svc_01M6EMRN1MDTARE52AQEMQVHRX
+    - svc_01M0EXTN8TCQXY4N7P5AS15M7H
+    - svc_01M0EXSB8JKNG0T1M3X6MX9NN3
+    - svc_01M0EXV2XX91V9C30A9K6K9BMZ
+    - svc_01M0EXR53EDJN5YMAF930BZZPZ
+    autostart: true
+  created_at: 2026-08-20T06:30:08.709048307Z
+- id: svc_01M0EXSB8JKNG0T1M3X6MX9NN3
+  spec:
+    name: broker
+    project_id: prj_01M0EXKVJPEEQ3HBQ2G93VG38N
+    source: !Compose
+      content: |
+        services:
+          rp_broker:
+            image: rabbitmq:4-management
+            restart: unless-stopped
+            environment:
+              RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
+              RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
+            volumes:
+              - rabbitmqdata:/var/lib/rabbitmq
+
+        volumes:
+          rabbitmqdata:
+      ingress_service: null
+    port: 5672
+    host_port: 20001
+    domain: null
+    tls_enabled: false
+    env_vars:
+    - key: RABBITMQ_DEFAULT_PASS
+      value: !Secret RABBITMQ_DEFAULT_PASS
+    - key: RABBITMQ_DEFAULT_USER
+      value: !Plain rabbit
+    env_comments: []
+    volumes: []
+    healthcheck:
+      kind: Tcp
+      interval_secs: 5
+      timeout_secs: 3
+      retries: 10
+      start_period_secs: 5
+    replicas: 1
+    resources:
+      cpu_shares: 0
+      mem_limit_bytes: 0
+    run_command: null
+    run_args: []
+    db_kind: rabbitmq
+    domains: []
+    pre_deploy_job_id: null
+    pre_deploy_job_ids: []
+    depends_on: []
+    autostart: true
+  compose_project: rp_01m0exsb_broker
+  created_at: 2026-08-20T06:29:56.626940611Z
+  secrets:
+  - id: sec_01M6GVVMQ6JPJVEYQYFZBSJ716
+    key: RABBITMQ_DEFAULT_PASS
+    value: ENC[age:YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBYR2p5L2UxQ2RsdTBoNTluYmQza1AzSXdjZ3VIbi9CK2dyYWJuOTIyQ2dvClA1UFE0RHR3QXhueGJLMVVveWw5czAzdHJuWHh4aW5pZ1luamVIUVFidUEKLT4gWDI1NTE5IFR6QzdsMzdIYlpLcUFwcWdkNWlWczdHck85Yll5aFRlc3B4Qnd1QWNOVGsKUHROSEdGSmJPUmMwWHVlQldsRWIvRUJBMGdYSnhRSi8xODVYeEprQW11SQotPiAvc1BCYGlxLWdyZWFzZSBIbmcgIzNSXmYKL1Nnd0RWeW5nQ25LdWVtZWVFZlVNYm8wTGpUZEJSZjNsTng0WmJYVVFweDJsSzV1eXdndHo1RTdMN2hTQTIydgo2cVNuNzJNakVVbzhHWkVKRk5CMzBZLzMxc0UwcDlJZkZwY3ZobjNHCi0tLSBZelV0WVp1YWtwTXRJSFp4d202OExWbE9RYzM4ZWIzbWF3ZkdnWGdURGtvCmqTF7Zvo/0k0YH3SskZFGrEQqE1gvf4eoOewWRcSADv4R5K3jvsnF7hOqC15ZDFovqiWgZpKQ==]
+- id: svc_01M0EXR53EDJN5YMAF930BZZPZ
+  spec:
+    name: cache
+    project_id: prj_01M0EXKVJPEEQ3HBQ2G93VG38N
+    source: !Compose
+      content: |
+        services:
+          rp_cache:
+            image: redis:7
+            restart: unless-stopped
+            command: redis-server --requirepass ${REDIS_PASSWORD}
+            volumes:
+              - redisdata:/data
+
+        volumes:
+          redisdata:
+      ingress_service: null
+    port: 6379
+    host_port: null
+    domain: null
+    tls_enabled: false
+    env_vars:
+    - key: REDIS_PASSWORD
+      value: !Secret REDIS_PASSWORD
+    env_comments: []
+    volumes: []
+    healthcheck:
+      kind: Tcp
+      interval_secs: 5
+      timeout_secs: 3
+      retries: 10
+      start_period_secs: 5
+    replicas: 1
+    resources:
+      cpu_shares: 0
+      mem_limit_bytes: 0
+    run_command: null
+    run_args: []
+    db_kind: redis
+    domains: []
+    pre_deploy_job_id: null
+    pre_deploy_job_ids: []
+    depends_on: []
+    autostart: true
+  compose_project: rp_01m0exr5_cache
+  created_at: 2026-08-20T06:29:17.550877191Z
+  secrets:
+  - id: sec_01M6EEZGD9SV31ZPSB8V59MQGM
+    key: REDIS_PASSWORD
+    value: ENC[age:YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA5eUxJaWtMNlVDenJzQ3kxZERaZ29sRHdvcGh6Q0ZDVURFN2Z0TFVYamhNCndGM3ZuZzRvNWJlekw3QW5YV1NwUkxqS29maGM1TXBYNlhxY3JoTE5sL3MKLT4gWDI1NTE5IHoxOVFFTmZmWDR6T0dsV25tRVR2MTBlYmJTaGIrQmdVTmVlUW5kVGNOeE0KUERPcUdSR0tlMkdydEkzZ0hnVzBHeDJEY1pVOFZmSmZuMlQ0RnloUUM4QQotPiAjSGBzQUhWLWdyZWFzZSBvcSIKc2pINWJ6UVdabitqRmovWE4yNHV2UndqCi0tLSArbTF3WjBDZU5yQXRyZllKN3M4YWF5NTRuK2MvRzRLVkJxS2xiMDN5SjVNCpnBY9WqsnAXgpmwzhuYi14Z7soEM95v6Gdps3l09MA5vInA9t4UJSvkIao5OSO7UJNJ6ty3jw==]
+- id: svc_01M6EMRN1MDTARE52AQEMQVHRX
+  spec:
+    name: db
+    project_id: prj_01M0EXKVJPEEQ3HBQ2G93VG38N
+    source: !Compose
+      content: |
+        services:
+          rp_db:
+            image: postgres:18
+            restart: unless-stopped
+            environment:
+              POSTGRES_DB: ${POSTGRES_DB}
+              POSTGRES_USER: ${POSTGRES_USER}
+              POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+            volumes:
+              - pgdata:/var/lib/postgresql
+
+        volumes:
+          pgdata:
+      ingress_service: null
+    port: 5432
+    host_port: 20000
+    domain: null
+    tls_enabled: false
+    env_vars: []
+    env_comments: []
+    volumes: []
+    healthcheck:
+      kind: None
+      interval_secs: 5
+      timeout_secs: 3
+      retries: 10
+      start_period_secs: 5
+    replicas: 1
+    resources:
+      cpu_shares: 0
+      mem_limit_bytes: 0
+    run_command: null
+    run_args: []
+    db_kind: postgres
+    domains: []
+    pre_deploy_job_id: null
+    pre_deploy_job_ids: []
+    depends_on: []
+    autostart: true
+  compose_project: rp_qemqvhrx_db
+  created_at: 2026-11-02T17:26:27.636712875Z
+- id: svc_01M6GVWREEVG10460NC4HHBXEY
+  spec:
+    name: s3
+    project_id: prj_01M0EXKVJPEEQ3HBQ2G93VG38N
+    source: !Compose
+      content: |
+        version: "3.8"
+
+        services:
+          rustfs:
+            image: rustfs/rustfs:latest
+            volumes:
+              - rustfs-data:/data
+            environment:
+              - RUSTFS_ACCESS_KEY
+              - RUSTFS_SECRET_KEY
+              - RUSTFS_ADDRESS=0.0.0.0:9000
+              - RUSTFS_CONSOLE_ADDRESS=0.0.0.0:9001
+              - RUSTFS_CONSOLE_ENABLE=true
+              - RUSTFS_CORS_ALLOWED_ORIGINS=*
+              - RUSTFS_CONSOLE_CORS_ALLOWED_ORIGINS=*
+            command: /data
+            restart: unless-stopped
+
+        volumes:
+          rustfs-data:
+      ingress_service: null
+    port: 9001
+    host_port: null
+    domain: app-2f46e70a.example.com
+    tls_enabled: false
+    env_vars:
+    - key: RUSTFS_ACCESS_KEY
+      value: !Secret RUSTFS_ACCESS_KEY
+    - key: RUSTFS_SECRET_KEY
+      value: !Secret RUSTFS_SECRET_KEY
+    env_comments: []
+    volumes: []
+    healthcheck:
+      kind: None
+      interval_secs: 5
+      timeout_secs: 3
+      retries: 10
+      start_period_secs: 5
+    replicas: 1
+    resources:
+      cpu_shares: 0
+      mem_limit_bytes: 0
+    run_command: null
+    run_args: []
+    db_kind: null
+    domains: []
+    pre_deploy_job_id: null
+    pre_deploy_job_ids: []
+    depends_on: []
+    autostart: true
+  compose_project: rp_c4hhbxey_rustfs
+  created_at: 2026-11-03T14:09:31.087410424Z
+  secrets:
+  - id: sec_01M6GY9B1X1HAZMFY41J3WBJJD
+    key: RUSTFS_ACCESS_KEY
+    value: ENC[age:YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSByZGQwa0UveDZOYUtnbHpURFRlYzlVbndkc0FpSFp0cE1QVGFacit2MGlBClJpMUtXcE9GV1h4RXl2Z0F2NEZvQ1h1VEZCVGdMQ0J5RC8zVm4velFWaHcKLT4gWDI1NTE5IDVBcWNhTUVuK2NSQytEWXNGOWxTN04raDB3aGwyRmdBSGJPZ3VxSFd2bm8Ka05xaWV4QUdIdDF0aFlJNjBrWHJxL0xCS0VpT3hicko4NGUzbFUyOVVTNAotPiBtQFAkamdyKS1ncmVhc2UgeyhBOyBuN2QgPlBxUSByZn1dXCkKalhUcUVJVUVQV1o0ZyszQ1VyT3Bmbnl1RFVUeXk0eWFaVG5Nd2cKLS0tIFhSN0RVMjBqdVJOdFo3eDlUWXZDckRWZVRza1hueklQVkc2SDJOeW9VRkUK6y0oLCGZ1klPtAPMApzRdm/F0xdIasQ/cKdZOevOT7+aNNhdVd0lvestwA==]
+  - id: sec_01M6GVYQG167Z56DTNQ276H43V
+    key: RUSTFS_SECRET_KEY
+    value: ENC[age:YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBJTU1BSmMrL0QvV3RzQUdGNmVOSHJLbkdUSWdZeHl6Q3BkUVR1Tm5IZVhZCjh0dGFCaVFzSC92VEp3RDNTdDc5UlQ3UVN0VnpjS2hsWW1pUWMvVGpMdUkKLT4gWDI1NTE5IFp0SnNMMHBxcDVNYUg5N2hSb2dSQzhCRG1pbHJ4U05qWVZwYUoyK3NzMjAKSHJTQ2VQbTA4clNpSHJORFB0RWRSckdHdjJBVnVXZmR3V0NIem00TVNmVQotPiBoJDprdCotZ3JlYXNlICZnbzl7RiB0dkxDIDooCjhwbmJhaFZWOVBIbnpvdUhyN3crS2cKLS0tIGxpeU1sN25YdDlTUWVtSE9GdUkvOVNjd3RUWU14eDZ0RTBBRmxUcFFYQVUKKlXDB8hiWN+qPT6MjQrO+RAervug6Q5py7Q0UrDcZaEMvrJ8CZnUETtCk4Yon3k5]
+- id: svc_01M0EXV2XX91V9C30A9K6K9BMZ
+  spec:
+    name: scheduler
+    project_id: prj_01M0EXKVJPEEQ3HBQ2G93VG38N
+    source: !Git
+      url: https://github.com/antoniofernandodj/chickie.git
+      branch: main-scheduler
+      root_path: .
+      watch_paths: []
+      submodules: false
+      dockerfile_path: dockerfiles/scheduler.dockerfile
+      build_context: .
+      build_stage: null
+      credentials: null
+      username: null
+      provider_id: gp_01M6GT0FXENWJD23BAK5QAN3NZ
+    port: 8080
+    host_port: null
+    domain: null
+    tls_enabled: false
+    env_vars:
+    - key: SCHEDULER_PORT
+      value: !Plain '8080'
+    - key: CONFIG_PATH
+      value: !Plain /app/scheduler.toml
+    env_comments: []
+    volumes: []
+    healthcheck:
+      kind: Tcp
+      interval_secs: 5
+      timeout_secs: 3
+      retries: 10
+      start_period_secs: 5
+    replicas: 1
+    resources:
+      cpu_shares: 0
+      mem_limit_bytes: 0
+    run_command: null
+    run_args: []
+    db_kind: null
+    domains: []
+    pre_deploy_job_id: null
+    pre_deploy_job_ids: []
+    depends_on:
+    - svc_01M6EMRN1MDTARE52AQEMQVHRX
+    - svc_01M0EXSB8JKNG0T1M3X6MX9NN3
+    - svc_01M0EXR53EDJN5YMAF930BZZPZ
+    autostart: true
+  created_at: 2026-08-20T06:30:53.629163859Z
+- id: svc_01M0EXT313VM1F1F38EF9GDFCS
+  spec:
+    name: ui
+    project_id: prj_01M0EXKVJPEEQ3HBQ2G93VG38N
+    source: !Registry
+      image: ''
+    port: 80
+    host_port: null
+    domain: null
+    tls_enabled: false
+    env_vars: []
+    env_comments: []
+    volumes: []
+    healthcheck:
+      kind: Tcp
+      interval_secs: 5
+      timeout_secs: 3
+      retries: 10
+      start_period_secs: 5
+    replicas: 1
+    resources:
+      cpu_shares: 0
+      mem_limit_bytes: 0
+    run_command: null
+    run_args: []
+    db_kind: null
+    domains: []
+    pre_deploy_job_id: null
+    pre_deploy_job_ids: []
+    depends_on:
+    - svc_01M0EXR53EDJN5YMAF930BZZPZ
+    - svc_01M0EXSB8JKNG0T1M3X6MX9NN3
+    - svc_01M0EXSQ24SZ2P5N6B2J3G93MB
+    - svc_01M0EXTN8TCQXY4N7P5AS15M7H
+    - svc_01M0EXV2XX91V9C30A9K6K9BMZ
+    - svc_01M6EMRN1MDTARE52AQEMQVHRX
+    autostart: true
+  created_at: 2026-08-20T06:30:20.963567973Z
+- id: svc_01M0EXTN8TCQXY4N7P5AS15M7H
+  spec:
+    name: worker
+    project_id: prj_01M0EXKVJPEEQ3HBQ2G93VG38N
+    source: !Git
+      url: https://github.com/antoniofernandodj/chickie.git
+      branch: main-worker
+      root_path: .
+      watch_paths: []
+      submodules: false
+      dockerfile_path: dockerfiles/worker.dockerfile
+      build_context: .
+      build_stage: null
+      credentials: null
+      username: null
+      provider_id: gp_01M6GT0FXENWJD23BAK5QAN3NZ
+    port: 80
+    host_port: null
+    domain: null
+    tls_enabled: false
+    env_vars:
+    - key: WORKER_PREFETCH
+      value: !Plain '10'
+    - key: WORKER_RECONNECT_DELAY
+      value: !Plain '5'
+    env_comments: []
+    volumes: []
+    healthcheck:
+      kind: None
+      interval_secs: 5
+      timeout_secs: 3
+      retries: 10
+      start_period_secs: 5
+    replicas: 1
+    resources:
+      cpu_shares: 0
+      mem_limit_bytes: 0
+    run_command: null
+    run_args: []
+    db_kind: null
+    domains: []
+    pre_deploy_job_id: null
+    pre_deploy_job_ids: []
+    depends_on:
+    - svc_01M0EXSB8JKNG0T1M3X6MX9NN3
+    - svc_01M6EMRN1MDTARE52AQEMQVHRX
+    - svc_01M0EXR53EDJN5YMAF930BZZPZ
+    autostart: true
+  created_at: 2026-08-20T06:30:39.642286599Z
+secrets:
+- id: sec_01M6GTKDTREDVXN5ZTF43KXJNQ
+  key: ASAAS_API_KEY
+  value: ENC[age:YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBUUjFybU0rSDZuRjFYcHovWjhCQlVKN2FDQ3BwRm5wUUhpRDlQU2tCRkdrCkJoaUdZWDRjblM3UEdRa2Rub3RBM2ZTRzl2aElwRXc3YnZMVkZnSnFVQ0UKLT4gWDI1NTE5IEs0cFl1V3hYTGZPTjZTem96VkRJTkxxc2NEVGxZK3RYeEMyN0hCcHJsUXcKQUhBeFdQWmpjSkxhNmUySlNqTllVcFA1VUxnMUE4SEdmUkZtK0JFQWVoZwotPiB4dDRhYEdeLWdyZWFzZSB6bXQgT0NlOAoxMmRYeWdJeUNwT0NIR2FwbTA2QW5DeFhOVzJkRlM1dEZNeWs2Sk0wSHZMTmFReWJZTnJTTzkySQotLS0gYWQ2STRXQmFQQjd2ZXgrT0hza1FzZ1k2UkNkK0N4ZU9waUE2d0xSUW1tMApFSBDZKG+2A11UM9Av9X80zeLJ6ZndY0X6zTiS9IB/MPBMtaiDBTq1xg==]
+- id: sec_01M6GTKM1H2GKYXWFD51SHW4RK
+  key: DATABASE_URL
+  value: ENC[age:YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA3MTg3Q01jTDVvYXJaSzNEVkpyb25lQTRoNSthWmZVcUZIUkV1cmxXY1hvCmwvUFdQdTJRb1FibGJhemxJbXJWa3gybFRDbGtXYld6MXc5Uml6Qi8wdUkKLT4gWDI1NTE5IGhlaTFWa0htZ2JEZW5LbERXbHVFbnNEUy9PNW1TN0pjSTBXYnhpeGttRlkKamFuVTdYcHI0M2tsTER3K2pXZ0FQU09qa29YdVFqR2taeVU5bkh5UVE2ZwotPiBELWdyZWFzZQpGbE1NMHZEak9VRjNhQQotLS0gWDBCQWk4bmphbTJ5eHdWQUxtZ252NStuYjhibEV0WnNUSGRJaDhLSTI5awoOkGFXSGNRxPx6sMNzRuKkuVrrHUzMUisS/5CiyVFm8MkdVaf24J/qPmuJhhoTPa1K6AkDWa5Ja3RrR4um3QJlk7znJ6TzjJe6roafpw==]
+- id: sec_01M6GTKDKXXRPYGV9RYR708J65
+  key: JWT_SECRET
+  value: ENC[age:YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBLVnl2NVFNK0N0Z21HT2xWY1Q1bUg1c2R6UnZMZktGREEwMXJFR0oyQ3hZCjlvREY1bjliRjJ4UnlEdnBTb1lMaDNLTXBRQ3ZxN0oxd3VDdHYwMGRaWUkKLT4gWDI1NTE5IFYxWXBld24xU2ZIZW5jR08zeVBoR2h6R3VIMFNvZVJ0WUdiTmZ3Uml6bXcKeFZvcDY3SWErcjhqdkNEaUxHMG5ycnNMTHJzZU5qdDFQSTI0VzdvUDI1dwotPiAkSDt7eispLWdyZWFzZQpqMC9ycmdLaFVpTlQyQ1lxY0phRE1mS1c0ckNCU3BZVk81SW81ZXNjNUQ2TTFuOTQzejRsTjNORGVmMlFoTlNSCm5XVHZuaHhYVnFteVFPVnFaZW1hKzRjcmVjYmxSTDY0TnZBCi0tLSBlZWxGRzdRc0h5Y1BlcGxZMDlzMmtlQ1lESlFBL3U0MzB5MTFiRnZiVEswCjq2Pz+cvCxVHKYCtExcxpw/ag8lhNtEAGanKrYo03n0B1i0VBZORvi2]
+- id: sec_01M6EMTYDA5ARQ4SAWKHQ6JK7V
+  key: POSTGRES_PASSWORD
+  value: ENC[age:YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBVakR4bkN2NnBRV3RKSy9RQ2JDSjdCN05tVGtSMEJ2dWVvVzdNSkMwR3lvCnRJRXZnbDhoRGZkdW1TWmR0anNwcnVyK0dLcjJzdnhUSGtWbVcrK2JnczQKLT4gWDI1NTE5IHJ2YmlkL1A3WEFhNDJzMmdSOHJOUXJZSFBNZ1R5UGpXN0lLVGtqaVFWRlkKb3dRM2ZDWUg4TkFrMjJEWVM4M2FxTzJqU1FqOHVCMjdFaEpaNUtMZWRyWQotPiAjLWdyZWFzZQpmZXdXZXhZN283bnlSK1huODAvdEZhKzV1bmJ4NUJYUTZPVUVMZC8xOHJHYXBCQVlIQ0ovNnJqTHhEVloxUkt0Cm12RUFpVFlHWEEKLS0tICtJYkd4WUdxWDVCWHFBak5Edk5mRFRkcTlTekFyY3FkMWFNOWROVlFMdmMKWju2t35RqBUoIj3cGwYuvnSEjnVc43qKR7MLgNfSFKOOU+A5RuoNj6ufqInIQ1zTbiwUpFDh]
+- id: sec_01M6GTKDJ2PBXQTCCVF37WK84R
+  key: RABBITMQ_PASS
+  value: ENC[age:YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB5bE1lUmlTSTRRT2dyS3lLSW5IK0h4QURXOW13VmdTc1plcDRVN2xLc21NClFIdis4YzZoa1FsSmxLMXh1d3E0SUt1QVhOZDFUR2UxTWJuTkFXTkt3OGsKLT4gWDI1NTE5IFlTNnF2MFhQaTZDazh4Nm5yYzhKcUZRRm1ZT01RZXV3TTVteFJaam1aZ0UKSHVzOHBtcDFURUJsTEFvMWE0TVJEQnh0bzA0bWZtV1VJcmV2MUprZEllbwotPiB+LWdyZWFzZSBfIFIoClA1V3NGN01Sc2xGK2xnTWtIcVNMeDRsKzRjOFVyZ3pJV2g3ZDRuMWxmNStXT1Q4V0hBaTdhYkpiTzBKeVlsNDcKR2NkQi9BUnltS3RTWHEveEpIWG4weTYyCi0tLSB3VVh6dER5cmJueWRLSU85VER3cWNKK25pa2ZDNVZ4dlBkeVNXVHc0QlVNCrnWeMEFH7hknUi+xpXubuQkyBhQNAf83nWAI4PK+TPtRZK1/H5dWgNS]
+- id: sec_01M6GTKDG3NDYED8TPKMTEC5SP
+  key: RABBITMQ_URL
+  value: ENC[age:YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBOUlNIbER3V0pNbWIzSjZaQzBOczZia0FFZllhalFONUdNVnNSUUVUZEFvCllxWGlnbWNydjV0ZGlBMEZ1bXM4eFUvWmlkMFkxVGxObzF2cXJML1luWDgKLT4gWDI1NTE5IGt6TmRIci9LcmZmUzM5N2x0ZFIvOTMrWmFWdkVDRVl6TStSMjJnOXp4U2sKQ2RHQkJGSmhHVEJYMmRUQnNMQWVhSGlxbGxFcndYOUVjbkQ4YUw0WTA5bwotPiBIZS1ncmVhc2UgY1J2Q0kgaV09MWM+eX4gbX17MjROClB0Y2laRVI2ZWJ5SW96ZDdtdjZGNmcKLS0tIGFwanBBZUVZRzZtMUJTenJKd1FmY0ZWUmZZdVM1Rjh5M2NNcWJhQmF0SXMKTD4ndMspwg1a6zltkXx+v/GAYZ3dEdBnYx8oqdPKXf1lPXQSF7Hnc7yzmTqhDX7ArbAGDAJOPPMG7KVcseLXrm62pkwFEYfEvA==]
+- id: sec_01M6GTKDNKVWNG1CWTZ4A3QRCW
+  key: S3_ACCESS_KEY_ID
+  value: ENC[age:YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBvTzBHa3RzMURYVkVuQ0FJY2ZXdUx4OGZvVlNUQ0tnUHJiNVUzWUxGQmo0CjIyNG1YcWZtL3pOcHZGR0xVcWZyOGhpeUdTa1c0SVN5MllTWmtFdG5iUEEKLT4gWDI1NTE5IC9Mb28wckV4VDhNTGxUWVR3Ym04NEY3ei83YlpYVXNuVFQ5azRacm8rVWsKaEh5QTRRODk5RkdmTXVDdW9Jd2wyaThVNEI5WUIvVzBjUmdSM1kwUmczYwotPiBKP2VhSC1ncmVhc2UKMm95ZmlCbitVczJMZ0VqMWhPRXlUc0dwVTNJOTBMZEN5R3hHcWF5NFM5dnR0RHFwU2FJYlJzUnVtUE90ZnBpVgpPR3FmcnR3OU56OU9lRks2Z1MvUDRJdlJEYnZLY3cxS2RxNmtqa05CRVgvT09pR0ZWMTBJeXgyVAotLS0gQmlIUnZ4WEtWYlpnQVM0S2J4bXc4VEZTblFjZWQwK0lSN1NHR1BUYVVhQQoSZnRj0BKYx7/jUV63dZXjNPsITNL41j3fLO+mpujxA9ViRadEgZZMtw==]
+- id: sec_01M6GTKDQRGQFMEX7JWG1RY9X8
+  key: S3_SECRET_ACCESS_KEY
+  value: ENC[age:YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBKNnBXL0trVEo2NkZhbkpJZkFXNStSWE95TU9pamt2dGNhWlFpOFZuckZ3CjNXd1dEbmZCT3FNSWZPbTFJczNlb2tQNzByTTNiak00anMyMWl2N21VZTgKLT4gWDI1NTE5IE9OSGRXQ29VYkExS29yM0FwN2ZzNzVpek5QekpNS3B4Tm53UUMzaWMwVGMKUFZ1RmcrbDRYRkM2TjE1akM2a1pOQnQxZW02MjJxTHZwKzJrZjVlSGlBbwotPiA5Ji1ncmVhc2UgQCAnLn1XWGtECmo2cDZlYlEyUXdCUEphZnB0eG9icEpxV0FZODFKdjRlNG9JWDJseHR5ekRiV1ZjOXNXSGl3dUZkUENpZjJuUTEKTTRQMXFnCi0tLSBKaTRyblExZGhuaUtFcmRGM0MwS0RlZjR5Ui9NVFRDKzBUNkp3R3NBVWhzCmW5CY9/2ij9j6XUd7ZAJXz7BhQuXwN3Ckt7Wadt5G0HHGz3+Eg49ulm]
+- id: sec_01M6GTKDS9H3KX5R0S28869N14
+  key: SMTP_PASS
+  value: ENC[age:YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBNYnAvTHVqclkvTnBwQXVUSExJdUpROGRjNDFNa2tSRU83WEVhcUdIYVhVCnJzYmgzVmIvVkJwaTRpczNIZXJaRGxPbG9CdU1RVjhKN1hwQW5Ga25wOGcKLT4gWDI1NTE5IFZrdWhYMDZVMGVTRWwwbkR4YXFBTVZLeEkrSTRDVzVOMmhWcDU3d2JrbncKOENRc2xoZkVOL3RjYzlIUWRudzFDOFdxbmNtTUQ3SUJZcmFKdWJKLzQrbwotPiBbTTNcVlY6Ti1ncmVhc2UgRyAwQnQ3STsgMUB5ZFFHNCArRihDCmd0Z0NySzBvYlRZb3BTYXI1RU9PRDFOSHEvUWxQK3BrRnF3ZnRxVEtpUDBlczRmOTc2WVJpdW1tYktoU2VvQjAKUWZCdUVBNzh0ZlI3UE1RSk40L3lJbWtGL1UwU3p1YU5nOXNGREwramVWRTM2ZwotLS0gc1RtUTBsb3J6aVhNZHdEOVNvVmhoODdOOG1YNVRxdlY2YU9VUDcwVVJncwqYlRHGq2LXDanaLHJMEzd4gvfUtlxRjxi1ydfvNoIen95BGu1662Z/1A==]
+- id: sec_01M6GTKDWPV16DSW9RPPVZQ289
+  key: TOKEN_DE_AUTENTICACAO_ASAAS
+  value: ENC[age:YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBJUXNRdmhMcFNOUmlMVkhydE1BSGlydEh5cHU4T2ZCSmtTWEN3dDBQQ1FNCmJQM2Q1eHBRcTVVTC9xZHlqYUN4MjFMQ2xaRCtBYWtZdzAxcmw3Z0tBWHMKLT4gWDI1NTE5IE4wV3hia1piVS9PaGhreTJEb3FCZUI0Uk9WYWJNYWV5a2lJaVJEbzI0bTQKRHhSYjVNL004TlRQbUI5Rnp1cUV4SHRzUjFFM3lWNjlKckptaU9mNGJaRQotPiA6Y1Nvdk5sLWdyZWFzZSA3PApwWXQ4MEhpNXdPbjEzM0o3cGZ4Y2xFMElUeld5aU1Qb2h3Ci0tLSAwOUR5TUV5a01Dc2ZIUisyMnpSUktuaUVqOW5nYk9LWUF1TkQ3VUZ2OUM4CqJDraMmpd3pvRkz40B42Vbgc1B6Uysl5jJaByv3rcvW31QX9D9D8qgE]
+- id: sec_01M6GY7DCRZ9ZD74YJMGAEW48H
+  key: VAPID_PRIVATE_KEY
+  value: ENC[age:YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBMVHhtR1Nhb09NajBjcE5yUGYzeWg2Rlg3T2Q3dysvK0pUSGVIUXYzTTJrClRhYlJsVTF2WG1sUkdRamtjb1VTM04zWmpLZklrdmNxaXZFU2tMajl5dDAKLT4gWDI1NTE5IFByMDkzRWRaMHhDQjVFcWo3NVZQYnZGSklXenhMWkxUYklUZFM3L1BZbUkKWjF1UmlzN2hwaHBGY005aGpxU0dKZTBiR1g2dnZTSlJRSGhHTFhTZUdtYwotPiAqfl5Ddi1ncmVhc2UgMFw0YCJSCm1BdGpRcWRxY0VjeDlwUEhFeXF0SFNaM0JKdzVMeVNydzNCbHREd0d3NEJoQk5nS1dWOXFHU0Q3OUlJWUFFWkIKUGxlYW5LNVFXMEc4and4Vk1HU3dta2FQa1lNY1NHOExiTWFGZ0p4ZVRUS2F5amUxTE0rWFlrS2hMOUxyQmZaaAp3UQotLS0gb00vVjBrLzhxYm9hQjVxWFJnTEJWRUx0QzAwMHV2blptZ202U2JyWFk0VQpYGYMalps87As6cR5pTaYmCswk6pM36uK/IQriTyTc/VCEK701D//zyg==]
+- id: sec_01M6GY7FS1JCJAT7APG6KFASC0
+  key: VAPID_PUBLIC_KEY
+  value: ENC[age:YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBTNGNLcXRpcnorYjBTUW1ZMW1PaFdXQXljWnNCa1pTdUk1YWlyMmtjQmw0CkZEQWRDK0dRM1NvMkFGUVVzUGZaeUt6QldScHo2ek5hd2hYeis0VXZmQ3MKLT4gWDI1NTE5IGhhOUhuUGNWdGwweEVpNkxoRW9LQlJ1VEVaeEloZXRuZU44bHM1SDBpUjQKbWE5THM3a3hGV0ZtcS80bVp5dnlpNDZKUVIvZDJhK1dxZVUxZDlaV2w4QQotPiBvLWdyZWFzZSB1VTVJSQpTc2VzaVdQRmxvRFA1TFlNWGdSZHh1SXpWdXpmWW4rUUFrTDlzTXNrRURhQ05qV25qTnNOSklBNzZyRHRLTnVDCnBWRmpzL1FNMjZidjhEV0xPYXZtZjNpTjRXemlZdktRV0VuV2FnbwotLS0gU0tVcmFoblZsdjJqdDFKV3BDNXVhdXFTTlNkK2VteGFuWThKTnBLR1h6WQpWOi1qKlUotZ5mwEvzCIErnCgMmVsn9pnn/gFNkXgscpeT2S48y2s8kw==]

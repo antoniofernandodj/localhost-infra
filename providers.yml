@@ -1,0 +1,9 @@
+providers:
+- id: gp_01M6GT0FXENWJD23BAK5QAN3NZ
+  kind: github
+  name: GitHub
+  base_url: https://github.com
+  auth_mode: pat
+  account_login: antoniofernandodj
+  account_avatar: https://avatars.githubusercontent.com/u/96031071?v=4
+  created_at: 2026-11-03T13:36:36.622411212Z

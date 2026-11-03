@@ -1,0 +1,18 @@
+docker_cleanup_config:
+  build_cache: true
+  build_cache_older_than_hours: 168
+  containers: true
+  enabled: true
+  images: true
+  images_all: true
+  images_older_than_hours: 168
+  last_run_at: 2026-11-03T03:00:04.452625688Z
+  networks: true
+  next_run_at: 2026-11-04T03:00:00Z
+  recurrence:
+    Daily:
+      hour: 3
+      minute: 0
+  volumes: false
+  volumes_all: false
+  warm_after_cleanup: true
