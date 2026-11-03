@@ -121,8 +121,7 @@ services:
     db_kind: null
     domains: []
     pre_deploy_job_id: null
-    pre_deploy_job_ids:
-    - job_01M6HD5C77G605JF3AP7C0TJFT
+    pre_deploy_job_ids: []
     depends_on:
     - svc_01M6EMRN1MDTARE52AQEMQVHRX
     - svc_01M0EXTN8TCQXY4N7P5AS15M7H
@@ -324,7 +323,8 @@ services:
     db_kind: rustfs
     domains: []
     pre_deploy_job_id: null
-    pre_deploy_job_ids: []
+    pre_deploy_job_ids:
+    - job_01M6HD5C77G605JF3AP7C0TJFT
     depends_on: []
     autostart: true
   compose_project: rp_c4hhbxey_rustfs
