@@ -20,7 +20,7 @@ env_vars:
 - key: OWNER_EMAIL
   value: !Plain CHANGE_ME@example.com
 - key: FRONTEND_BASE_URL
-  value: !Plain https://CHANGE_ME
+  value: !Plain https://app.chiquitos.tech/
 - key: JWT_SECRET
   value: !Secret JWT_SECRET
 - key: RABBITMQ_HOST
