@@ -87,7 +87,7 @@ services:
     project_id: prj_01M0EXKVJPEEQ3HBQ2G93VG38N
     source: !Git
       url: https://github.com/antoniofernandodj/chickie.git
-      branch: deploy/api
+      branch: main-api
       root_path: .
       watch_paths: []
       submodules: false
@@ -103,7 +103,7 @@ services:
     tls_enabled: false
     env_vars:
     - key: APP_BASE_URL
-      value: !Plain https://api.chiquitos.tech
+      value: !Plain https://CHANGE_ME
     env_comments: []
     volumes: []
     healthcheck:
@@ -119,10 +119,7 @@ services:
     run_command: null
     run_args: []
     db_kind: null
-    domains:
-    - domain: api.chiquitos.tech
-      port: null
-      tls: true
+    domains: []
     pre_deploy_job_id: null
     pre_deploy_job_ids:
     - job_01M6HFD00XFEWM70XWBJA9JBKD
@@ -341,7 +338,7 @@ services:
     project_id: prj_01M0EXKVJPEEQ3HBQ2G93VG38N
     source: !Git
       url: https://github.com/antoniofernandodj/chickie.git
-      branch: deploy/scheduler
+      branch: main-scheduler
       root_path: .
       watch_paths: []
       submodules: false
@@ -444,7 +441,7 @@ services:
     project_id: prj_01M0EXKVJPEEQ3HBQ2G93VG38N
     source: !Git
       url: https://github.com/antoniofernandodj/chickie.git
-      branch: deploy/worker
+      branch: main-worker
       root_path: .
       watch_paths: []
       submodules: false
@@ -511,7 +508,7 @@ jobs:
   git_source:
     provider_id: gp_01M6GZF068WC9YN2J2S1FAHX6F
     url: https://github.com/antoniofernandodj/chickie.git
-    branch: deploy/api
+    branch: main-api
     username: null
     credentials: null
     compose_path: dockerfiles/migrate.compose.yml
