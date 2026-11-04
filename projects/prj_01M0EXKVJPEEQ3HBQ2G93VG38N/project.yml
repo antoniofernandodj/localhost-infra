@@ -519,21 +519,24 @@ jobs:
   enabled: true
   created_at: 2026-11-03T19:50:26.077872536Z
 - id: job_01M6HYTG7HMMC4X55KH4QK4N0X
-  name: rotacionar-senha-db
+  name: verificar-senha-db
   compose: |
     services:
-      rotate:
+      verify:
         image: docker.io/library/postgres:18
         entrypoint: ["/bin/sh", "-c"]
-        command: ["echo \"ALTER USER CURRENT_USER PASSWORD :'newpw'\" | psql -v ON_ERROR_STOP=1 -v newpw=\"$$NEWPW\" && echo ROTACAO_OK"]
+        command: ["PGPASSWORD=\"$$NEWPW\" psql -tAc \"select 'NOVA_SENHA_OK'\" ; if PGPASSWORD=\"$$OLDPW\" psql -tAc 'select 1' >/dev/null 2>&1; then echo ANTIGA_AINDA_VALE; exit 1; else echo ANTIGA_RECUSADA; fi"]
         environment:
           PGHOST: ${POSTGRES_HOST}
           PGPORT: ${POSTGRES_PORT}
           PGUSER: ${POSTGRES_USER}
           PGDATABASE: ${POSTGRES_DB}
-          PGPASSWORD: ${POSTGRES_PASSWORD}
-          NEWPW: ${POSTGRES_PASSWORD_NEW}
-  main_service: rotate
+          NEWPW: ${POSTGRES_PASSWORD}
+          OLDPW: ${OLDPW}
+  main_service: verify
+  env_vars:
+  - key: OLDPW
+    value: !Secret POSTGRES_PASSWORD_OLD
   enabled: true
   created_at: 2026-11-04T00:19:57.297739975Z
 secrets:
