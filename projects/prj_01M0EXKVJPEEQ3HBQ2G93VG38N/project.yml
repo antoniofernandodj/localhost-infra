@@ -2,8 +2,6 @@ id: prj_01M0EXKVJPEEQ3HBQ2G93VG38N
 name: Chiquitos
 env_vars:
 - key: POSTGRES_PASSWORD
-  value: !Secret POSTGRES_PASSWORD_OLD
-- key: POSTGRES_PASSWORD_NEW
   value: !Secret POSTGRES_PASSWORD
 - key: POSTGRES_USER
   value: !Plain postgres
