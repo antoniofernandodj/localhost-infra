@@ -489,16 +489,15 @@ services:
 jobs:
 - id: job_01M6HD5C77G605JF3AP7C0TJFT
   trigger_service_id: svc_01M6GVWREEVG10460NC4HHBXEY
-  name: criar-bucket-chickie-uploads
-  compose: |
-    services:
-      bucket:
-        image: docker.io/curlimages/curl
-        entrypoint: ["/bin/sh", "-c"]
-        command: ["curl -sS -f -X PUT --aws-sigv4 aws:amz:us-east-1:s3 --user \"$$AK:$$SK\" -o /dev/null -w 'HTTP %{http_code}\\n' http://rp_s3:9000/chickie-uploads"]
-        environment:
-          AK: ${RUSTFS_ACCESS_KEY}
-          SK: ${RUSTFS_SECRET_KEY}
+  name: bucket
+  compose: ''
+  git_source:
+    provider_id: gp_01M6GZF068WC9YN2J2S1FAHX6F
+    url: https://github.com/antoniofernandodj/chickie.git
+    branch: main-api
+    username: null
+    credentials: null
+    compose_path: dockerfiles/bucket.compose.yml
   main_service: bucket
   enabled: true
   created_at: 2026-11-03T19:11:19.271472008Z
