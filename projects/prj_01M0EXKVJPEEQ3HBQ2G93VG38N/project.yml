@@ -518,27 +518,6 @@ jobs:
   main_service: migrate
   enabled: true
   created_at: 2026-11-03T19:50:26.077872536Z
-- id: job_01M6HYTG7HMMC4X55KH4QK4N0X
-  name: verificar-senha-db
-  compose: |
-    services:
-      verify:
-        image: docker.io/library/postgres:18
-        entrypoint: ["/bin/sh", "-c"]
-        command: ["PGPASSWORD=\"$$NEWPW\" psql -tAc \"select 'NOVA_SENHA_OK'\" ; if PGPASSWORD=\"$$OLDPW\" psql -tAc 'select 1' >/dev/null 2>&1; then echo ANTIGA_AINDA_VALE; exit 1; else echo ANTIGA_RECUSADA; fi"]
-        environment:
-          PGHOST: ${POSTGRES_HOST}
-          PGPORT: ${POSTGRES_PORT}
-          PGUSER: ${POSTGRES_USER}
-          PGDATABASE: ${POSTGRES_DB}
-          NEWPW: ${POSTGRES_PASSWORD}
-          OLDPW: ${OLDPW}
-  main_service: verify
-  env_vars:
-  - key: OLDPW
-    value: !Secret POSTGRES_PASSWORD_OLD
-  enabled: true
-  created_at: 2026-11-04T00:19:57.297739975Z
 secrets:
 - id: sec_01M6GTKDTREDVXN5ZTF43KXJNQ
   key: ASAAS_API_KEY
