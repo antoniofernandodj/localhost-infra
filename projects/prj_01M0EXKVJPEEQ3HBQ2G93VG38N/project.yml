@@ -87,9 +87,17 @@ services:
     project_id: prj_01M0EXKVJPEEQ3HBQ2G93VG38N
     source: !Git
       url: https://github.com/antoniofernandodj/chickie.git
-      branch: main-api
+      branch: main
       root_path: .
-      watch_paths: []
+      watch_paths:
+      - crates/api
+      - crates/core
+      - Cargo.toml
+      - Cargo.lock
+      - .sqlx
+      - data
+      - migrations
+      - dockerfiles/api.dockerfile
       submodules: false
       dockerfile_path: dockerfiles/api.dockerfile
       build_context: .
