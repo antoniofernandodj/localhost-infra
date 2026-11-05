@@ -481,6 +481,8 @@ services:
       value: !Plain '10'
     - key: WORKER_RECONNECT_DELAY
       value: !Plain '5'
+    - key: kerlon
+      value: !Plain kerlon
     env_comments: []
     volumes: []
     healthcheck:
