@@ -126,7 +126,7 @@ services:
       mem_limit_bytes: 0
     run_command: null
     run_args: []
-    db_kind: null
+    product: null
     domains: []
     pre_deploy_job_id: null
     pre_deploy_job_ids:
@@ -184,7 +184,7 @@ services:
       mem_limit_bytes: 0
     run_command: null
     run_args: []
-    db_kind: rabbitmq
+    product: rabbitmq
     domains: []
     pre_deploy_job_id: null
     pre_deploy_job_ids: []
@@ -230,7 +230,7 @@ services:
       mem_limit_bytes: 0
     run_command: null
     run_args: []
-    db_kind: redis
+    product: redis
     domains: []
     pre_deploy_job_id: null
     pre_deploy_job_ids: []
@@ -277,7 +277,7 @@ services:
       mem_limit_bytes: 0
     run_command: null
     run_args: []
-    db_kind: postgres
+    product: postgres
     domains: []
     pre_deploy_job_id: null
     pre_deploy_job_ids: []
@@ -331,7 +331,7 @@ services:
       mem_limit_bytes: 0
     run_command: null
     run_args: []
-    db_kind: rustfs
+    product: rustfs
     domains: []
     pre_deploy_job_id: null
     pre_deploy_job_ids:
@@ -386,7 +386,7 @@ services:
       mem_limit_bytes: 0
     run_command: null
     run_args: []
-    db_kind: null
+    product: null
     domains: []
     pre_deploy_job_id: null
     pre_deploy_job_ids:
@@ -433,7 +433,7 @@ services:
       mem_limit_bytes: 0
     run_command: null
     run_args: []
-    db_kind: null
+    product: null
     domains:
     - domain: app.chiquitos.tech
       port: null
@@ -495,7 +495,7 @@ services:
       mem_limit_bytes: 0
     run_command: null
     run_args: []
-    db_kind: null
+    product: null
     domains: []
     pre_deploy_job_id: null
     pre_deploy_job_ids:
