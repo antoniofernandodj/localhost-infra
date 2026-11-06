@@ -6,9 +6,9 @@ docker_cleanup_config:
   images: true
   images_all: true
   images_older_than_hours: 168
-  last_run_at: 2026-11-05T03:00:38.498834437Z
+  last_run_at: 2026-11-06T03:01:17.922525920Z
   networks: true
-  next_run_at: 2026-11-06T03:00:00Z
+  next_run_at: 2026-11-07T03:00:00Z
   recurrence:
     Daily:
       hour: 3
