@@ -75,8 +75,6 @@ env_vars:
   value: !Secret VAPID_PRIVATE_KEY
 - key: VAPID_SUBJECT
   value: !Plain mailto:CHANGE_ME@example.com
-- key: xc
-  value: !Plain xc
 env_comments:
 - text: '# --- // ---'
   before_key: null
