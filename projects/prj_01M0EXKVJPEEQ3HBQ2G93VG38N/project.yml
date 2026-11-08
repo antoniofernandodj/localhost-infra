@@ -139,6 +139,7 @@ services:
     - svc_01M0EXR53EDJN5YMAF930BZZPZ
     - svc_01M6GVWREEVG10460NC4HHBXEY
     autostart: true
+    registry_auto_deploy: false
   created_at: 2026-08-20T06:30:08.709048307Z
   webhook_token: ENC[age:YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBoUGowRHBjM1IyRnh6Tm9GRE03SUNFZVc4bGVIOVZ6VGw4K0ZWdlhPdlJRCkJYbDdjU1paU3A5eHBIbWpNTmFtbFBKMDVsTUIyVk1PdWppT0lLVklrakEKLT4gWDI1NTE5IFRpRmFXSllSVXRQUjB3OG0vZS9ZY08wS01Mc201cnQ1Q1hxSDA0RjdQVDQKWGh4WmRZMC9ta3A5elhFNGlRQ3o2TTlNVWVHT0Z6NjIxbi9aWDd0eS9uUQotPiBeJ0B1P1dJOS1ncmVhc2UKUWE1RXBGOWg1OC9icHBCVElZZ1AwODltbkxNdVdGK2tJOGcxSU9uQkVkVENjUGRzSjlOSnFLYnFscVp1MVEKLS0tIHdJbmtYNEZmUGt4SGdteENpWWlGeEdXbVBTTGQ0TFlaWmlLVVYyTEZ5b00K0UpwaUUaPsvMDLjjK2CubXEJ08EejVgXhL0SSMcoz5o6hPRrGRA3IZ0p7QNc4ClmzdGuDf1VamtoWmW+7M0kn6Z40+WA4/ia6fxGip1k2bo=]
 - id: svc_01M0EXSB8JKNG0T1M3X6MX9NN3
@@ -189,6 +190,7 @@ services:
     pre_deploy_job_ids: []
     depends_on: []
     autostart: true
+    registry_auto_deploy: false
   compose_project: rp_01m0exsb_broker
   created_at: 2026-08-20T06:29:56.626940611Z
 - id: svc_01M0EXR53EDJN5YMAF930BZZPZ
@@ -235,6 +237,7 @@ services:
     pre_deploy_job_ids: []
     depends_on: []
     autostart: true
+    registry_auto_deploy: false
   compose_project: rp_01m0exr5_cache
   created_at: 2026-08-20T06:29:17.550877191Z
 - id: svc_01M6EMRN1MDTARE52AQEMQVHRX
@@ -282,6 +285,7 @@ services:
     pre_deploy_job_ids: []
     depends_on: []
     autostart: true
+    registry_auto_deploy: false
   compose_project: rp_qemqvhrx_db
   created_at: 2026-11-02T17:26:27.636712875Z
 - id: svc_01M6GVWREEVG10460NC4HHBXEY
@@ -337,6 +341,7 @@ services:
     - job_01M6HD5C77G605JF3AP7C0TJFT
     depends_on: []
     autostart: true
+    registry_auto_deploy: false
   compose_project: rp_c4hhbxey_rustfs
   created_at: 2026-11-03T14:09:31.087410424Z
 - id: svc_01M0EXV2XX91V9C30A9K6K9BMZ
@@ -395,6 +400,7 @@ services:
     - svc_01M0EXSB8JKNG0T1M3X6MX9NN3
     - svc_01M0EXR53EDJN5YMAF930BZZPZ
     autostart: true
+    registry_auto_deploy: false
   created_at: 2026-08-20T06:30:53.629163859Z
   webhook_token: ENC[age:YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBtdWpXRGlYU2lXdVlob080QnJ5Ny9vdEExV0FqSldHc0RzcTgrRjRmQUJ3CmFWd2s1akFmVUIzNnFCd3dXVlFGaGZlZGNzeHVOczdsVkRJSnpsZkpOYkEKLT4gWDI1NTE5IDd5elVLNkJkV0NobzduRjk3YWdQaE5McnZhcTN0R0hwSlJTYU4rL0gwWG8Kdy8xZFJEcndrMVB2TDBBMnJmNWVzVm93dDlXK1B0clFJazhQUGM1aHRtOAotPiBNPWl0LWdyZWFzZSBnKFcqJCIgKn01ClNUL2laSWUzalM4cWFvMVc3SjlTa2VBb2gyTQotLS0gWTdyNjNmaXE3V0k2U3hLTHRuU1AzazREb1BESzFTdnRtaFI3b2d3SWZCawof5wCMcwj/enfiXDMriee7wPbtt3fgHOdWJCcqNvNiDn+2wLsHQ4MtEJeHqJZcQPBqntURCAZxpL4w2cgprWiibWF3Ug8s5vbkOfqt79MwYA==]
 - id: svc_01M0EXT313VM1F1F38EF9GDFCS
@@ -447,6 +453,7 @@ services:
     - svc_01M0EXV2XX91V9C30A9K6K9BMZ
     - svc_01M6EMRN1MDTARE52AQEMQVHRX
     autostart: true
+    registry_auto_deploy: false
   created_at: 2026-08-20T06:30:20.963567973Z
   webhook_token: ENC[age:YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBqcHJMNmU3dHV0M1RGWCtUeURXRnpRV2IvM1NYYlRsd09BQitZWTBsNFVrCmhwMzVTa2xiR3lYUXl0TXVKbGZhdUVaVXlZSjg3OHR6eGFLUFQ3cHg3cWsKLT4gWDI1NTE5IHJSL3pDYnlnSG8xQklMcm1WaGYvQnlPQm11TzJwRWxQQ0lmSFlFc3ZCU1kKSlA1WmtjbGp4dzBNa1RMK0l3SXBNSVJzTWpZREdMR1pkSlJoQW8rSzdwNAotPiBKdGp0LWdyZWFzZQpaejF3K2dqTGNXS3Z6RTVYaVgzMDVsNGxiVnJJcjBTSGZxZWsxS3pYblVjMGMxRHpzSFhpVW9Ma3JJbjQ1SkNrCmxEemsxZEtZdXE1U3N0ZytYRTgKLS0tIGowWHM1aUxZU0RFOTFTRjVCTWpnY29GbEUrdE5ROWphT0d0bmhIZ2lyTWsKSwITxa9EdKNR585FPwYoR0WIE+rpGiLy1iFDV4JpMCkWKR+6F078QmsvipVtDr1IKGKt+jXUBRtxd6xKRZjEXwc16KhNDJ5p7xT41hIdZVo=]
 - id: svc_01M0EXTN8TCQXY4N7P5AS15M7H
@@ -504,6 +511,7 @@ services:
     - svc_01M6EMRN1MDTARE52AQEMQVHRX
     - svc_01M0EXR53EDJN5YMAF930BZZPZ
     autostart: true
+    registry_auto_deploy: false
   created_at: 2026-08-20T06:30:39.642286599Z
   webhook_token: ENC[age:YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBqbm5wM0ZGd3JwZWxzSlo0V3FlM2F2TStCRUV5QVE5M1ZEd2dhTlJucm1BCm5KM3NMZnVhcG00WnZWY1RqYUZBR2dObjRxKytDaTBDa0dSZ3dMeHZxYmsKLT4gWDI1NTE5IExzQkNleGZoVjdwWS8yOWtHNEwzdllTM3lhK1RTT21VOGU3Y2MwU3FyaDgKQ0QvTFlxTndTaUREZGw5TEJTSmNiOVE2T0JmOS9KSk82RkJ6OW9zMGRmbwotPiB7PiJcOS1ncmVhc2UgUmczNTtjdiBpJidcSTxQfApUVm9zR3RlNDB4WnJkQzJ2dDRrZkxRCi0tLSBMSmJYWmlkU0JoeFFqMGJIRkVxM1Jnc3dSL0tGVzJLZDlIbE1MYUJ3cEM4Cu6icne7TW15VTDiFrwsUeFH6nd9NLGlOY52ZzFbOrHx+2z+VtGCdhNO/RT3NaDKsxHC0tgA9+vitnEacdzOiNKJW3aK3G3gBkYwJbGJGL65]
 jobs:
