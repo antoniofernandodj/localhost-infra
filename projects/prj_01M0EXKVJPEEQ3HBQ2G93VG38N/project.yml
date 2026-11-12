@@ -499,12 +499,8 @@ services:
     product: null
     domains: []
     pre_deploy_job_id: null
-    pre_deploy_job_ids:
-    - job_01M6HFD00XFEWM70XWBJA9JBKD
-    depends_on:
-    - svc_01M0EXSB8JKNG0T1M3X6MX9NN3
-    - svc_01M6EMRN1MDTARE52AQEMQVHRX
-    - svc_01M0EXR53EDJN5YMAF930BZZPZ
+    pre_deploy_job_ids: []
+    depends_on: []
     autostart: true
     registry_auto_deploy: false
   created_at: 2026-08-20T06:30:39.642286599Z
