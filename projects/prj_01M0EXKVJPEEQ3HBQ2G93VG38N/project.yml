@@ -80,68 +80,6 @@ env_vars:
 network_name: rp_net_01M0EXKV
 created_at: 2026-08-20T06:26:56.726606542Z
 services:
-- id: svc_01M0EXSQ24SZ2P5N6B2J3G93MB
-  spec:
-    name: api
-    project_id: prj_01M0EXKVJPEEQ3HBQ2G93VG38N
-    source: !Git
-      url: https://github.com/antoniofernandodj/chickie.git
-      branch: main
-      root_path: .
-      watch_paths:
-      - crates/api
-      - crates/core
-      - Cargo.toml
-      - Cargo.lock
-      - .sqlx
-      - data
-      - migrations
-      - dockerfiles/api.dockerfile
-      submodules: false
-      dockerfile_path: dockerfiles/api.dockerfile
-      build_context: .
-      build_stage: null
-      credentials: null
-      username: null
-      provider_id: gp_01M77VKAAPR08PKG713GK3VJDQ
-    port: 3000
-    host_port: null
-    domain: null
-    tls_enabled: false
-    env_vars:
-    - key: APP_BASE_URL
-      value: !Plain https://CHANGE_ME
-    env_comments: []
-    volumes: []
-    healthcheck:
-      kind: Tcp
-      interval_secs: 5
-      timeout_secs: 3
-      retries: 10
-      start_period_secs: 5
-    replicas: 1
-    resources:
-      cpu_shares: 0
-      mem_limit_bytes: 0
-    run_command: null
-    run_args: []
-    product: null
-    domains: []
-    pre_deploy_job_id: null
-    pre_deploy_job_ids:
-    - job_01M6HFD00XFEWM70XWBJA9JBKD
-    - job_01M6HD5C77G605JF3AP7C0TJFT
-    depends_on:
-    - svc_01M6EMRN1MDTARE52AQEMQVHRX
-    - svc_01M0EXTN8TCQXY4N7P5AS15M7H
-    - svc_01M0EXSB8JKNG0T1M3X6MX9NN3
-    - svc_01M0EXV2XX91V9C30A9K6K9BMZ
-    - svc_01M0EXR53EDJN5YMAF930BZZPZ
-    - svc_01M6GVWREEVG10460NC4HHBXEY
-    autostart: true
-    registry_auto_deploy: false
-  created_at: 2026-08-20T06:30:08.709048307Z
-  webhook_token: ENC[age:YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA4eW5rbzRQbFVMZkhGcHdWV3JwU0RnSFJyZXU4dU9SWTJHRGZhTWk2dFZjCkE4SXVYTGR4QVpFK1hqSjdlZ0ozMXlCbXB1blVDU1ZwUjJHcG0zSkh4cnMKLT4gWDI1NTE5IEdNMlBxbTNYOEpyOWtIdUVVN1pHVXpGUWNSLzlMZGUweXNkUHFHKzAvbGsKVWVLaUt5TzM1ZVFzb3RrYmVucE1TekgwZ28wNXZ6eTRTVE5GU0orUENYYwotPiBgci1ncmVhc2UgSiBwaSBVICt+CnIySU5GTEdTNUZ4UlRnQ2lXZwotLS0gbFk0WHNxTW9YdmtVNVR1OVhESDQwYnVtSHNjckdVaFExSXpHMm5aZWhYNAp3qP1bfhGv9ubtjCtNl1QM+GsxsfzUsmujgm8IB/Nm3A2rgeduRMgHQI/iEtn2eHcwbD5rUDJRXXnWbJyYJ6nPq1H1jZTt9liacOX587Q6XQ==]
 - id: svc_01M0EXSB8JKNG0T1M3X6MX9NN3
   spec:
     name: broker
@@ -235,7 +173,10 @@ services:
     domains: []
     pre_deploy_job_id: null
     pre_deploy_job_ids: []
-    depends_on: []
+    depends_on:
+    - svc_01M6EMRN1MDTARE52AQEMQVHRX
+    - svc_01M6GVWREEVG10460NC4HHBXEY
+    - svc_01M0EXSB8JKNG0T1M3X6MX9NN3
     autostart: true
     registry_auto_deploy: false
   compose_project: rp_01m0exr5_cache
@@ -288,6 +229,15 @@ services:
     registry_auto_deploy: false
   compose_project: rp_qemqvhrx_db
   created_at: 2026-11-02T17:26:27.636712875Z
+  backup:
+    policy:
+      enabled: true
+      recurrence: !Daily
+        hour: 23
+        minute: 31
+      keep: 7
+      stop: true
+    since: 2026-11-12T23:30:12.384181882Z
 - id: svc_01M6GVWREEVG10460NC4HHBXEY
   spec:
     name: s3
@@ -343,171 +293,6 @@ services:
     registry_auto_deploy: false
   compose_project: rp_c4hhbxey_rustfs
   created_at: 2026-11-03T14:09:31.087410424Z
-- id: svc_01M0EXV2XX91V9C30A9K6K9BMZ
-  spec:
-    name: scheduler
-    project_id: prj_01M0EXKVJPEEQ3HBQ2G93VG38N
-    source: !Git
-      url: https://github.com/antoniofernandodj/chickie.git
-      branch: main
-      root_path: .
-      watch_paths:
-      - crates/scheduler
-      - crates/core
-      - Cargo.toml
-      - Cargo.lock
-      - .sqlx
-      - scheduler.toml
-      - dockerfiles/scheduler.dockerfile
-      submodules: false
-      dockerfile_path: dockerfiles/scheduler.dockerfile
-      build_context: .
-      build_stage: null
-      credentials: null
-      username: null
-      provider_id: gp_01M77VKAAPR08PKG713GK3VJDQ
-    port: 8080
-    host_port: null
-    domain: null
-    tls_enabled: false
-    env_vars:
-    - key: SCHEDULER_PORT
-      value: !Plain '8080'
-    - key: CONFIG_PATH
-      value: !Plain /app/scheduler.toml
-    env_comments: []
-    volumes: []
-    healthcheck:
-      kind: Tcp
-      interval_secs: 5
-      timeout_secs: 3
-      retries: 10
-      start_period_secs: 5
-    replicas: 1
-    resources:
-      cpu_shares: 0
-      mem_limit_bytes: 0
-    run_command: null
-    run_args: []
-    product: null
-    domains: []
-    pre_deploy_job_id: null
-    pre_deploy_job_ids: []
-    depends_on: []
-    autostart: true
-    registry_auto_deploy: false
-  created_at: 2026-08-20T06:30:53.629163859Z
-  webhook_token: ENC[age:YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBUN2lJN1ZnVFB0Wjd4dzI0OENYOXFwS0lOa2NSQUNsT3kra2h1ODlRb0ZRCjNJZnZ0bnQya3JmbTVGRGJCVERhMWtBRE5BcDFUakVkVk1LZDBZL2xGYUUKLT4gWDI1NTE5IGN0eTlpbkkrekpRNURmekNIM1dUTjNLbHREd0ZoZ0tETXVrcjkyK1B1SGsKZ0taeDY5RmpKS0dDU3FvMG5WdWNRenNuWlRGTFEvdys1MXJQaWYxMGtvUQotPiBJcFI5cno1Wi1ncmVhc2UgJWVMOzggbE57biBrSzogM1F3aiQoCjlHVllXR0xMdU1mVTRHOC9aUGFBQlBHcUhZN3cKLS0tIEZzay9yRDQ4cTQxSGxCQTRJSHNXcmh0bTVNVG0xZHJ1WE5TUXN5YXFkMUUKqOgdJJv9vbU8CJYim0bNCoXL2n520SMets4f7LSixhj0TiD7yRHwqeXvG/shNBBp6K/alIKRMDGj9QFMAql56vNsdgJvQFcSkVtaJGUSDT0=]
-- id: svc_01M0EXT313VM1F1F38EF9GDFCS
-  spec:
-    name: ui
-    project_id: prj_01M0EXKVJPEEQ3HBQ2G93VG38N
-    source: !Git
-      url: https://github.com/antoniofernandodj/chickie-ui.git
-      branch: main
-      root_path: .
-      watch_paths: []
-      submodules: false
-      dockerfile_path: Dockerfile
-      build_context: .
-      build_stage: null
-      credentials: null
-      username: null
-      provider_id: gp_01M77VKAAPR08PKG713GK3VJDQ
-    port: 4000
-    host_port: null
-    domain: null
-    tls_enabled: false
-    env_vars: []
-    env_comments: []
-    volumes: []
-    healthcheck:
-      kind: Tcp
-      interval_secs: 5
-      timeout_secs: 3
-      retries: 10
-      start_period_secs: 5
-    replicas: 1
-    resources:
-      cpu_shares: 0
-      mem_limit_bytes: 0
-    run_command: null
-    run_args: []
-    product: null
-    domains:
-    - domain: app.chiquitos.tech
-      port: null
-      tls: true
-    pre_deploy_job_id: null
-    pre_deploy_job_ids: []
-    depends_on:
-    - svc_01M0EXR53EDJN5YMAF930BZZPZ
-    - svc_01M0EXSB8JKNG0T1M3X6MX9NN3
-    - svc_01M0EXSQ24SZ2P5N6B2J3G93MB
-    - svc_01M0EXTN8TCQXY4N7P5AS15M7H
-    - svc_01M0EXV2XX91V9C30A9K6K9BMZ
-    - svc_01M6EMRN1MDTARE52AQEMQVHRX
-    autostart: true
-    registry_auto_deploy: false
-  created_at: 2026-08-20T06:30:20.963567973Z
-  webhook_token: ENC[age:YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBIWEhva0Zjd1ZuUGVJTnQydU5XMVVKTHI1SktvSFF1aEkrWlFvOVZWbEUwClN2bnFBTzc0aDJKQXJOZHkyY2ZEQkN0a0lBbEZQSmxCMkNTNlFCQXpkY00KLT4gWDI1NTE5IEppU3VNZm9hU0dlWXd3STN0UmJleEZrZVVuVmtab2tiQnNNOHpKR2FjVDAKRWNuVGNMVmhjT25XZXVJV2hoMGZTRTJCUG9za2V0TWRsUFVESldBTUEvTQotPiAmI2tTOD0uei1ncmVhc2UKZ1A5bVNwVXROb1BDTHM0WmtHcHpTQ0huQTUwQWFOZWxqbFp4Q2t3Ci0tLSBUT0tmSWRHYk82cDNpWjlkVFJ0ZGJHOTA1NW02N2FxL2ZVdFRKUzYvSGM0ClX+ONBLO6CF2lLaooSz6CWwJ+rq6lfsjgyNr0JaOUB/foVDVIu0KI864I6tC4G2Ztd3YCD/vpandpy9IyrQ8f8LHFNHDAmOc2vEWW00Oxzl]
-- id: svc_01M0EXTN8TCQXY4N7P5AS15M7H
-  spec:
-    name: worker
-    project_id: prj_01M0EXKVJPEEQ3HBQ2G93VG38N
-    source: !Git
-      url: https://github.com/antoniofernandodj/chickie.git
-      branch: main
-      root_path: .
-      watch_paths:
-      - crates/worker
-      - crates/core
-      - Cargo.toml
-      - Cargo.lock
-      - .sqlx
-      - dockerfiles/worker.dockerfile
-      submodules: false
-      dockerfile_path: dockerfiles/worker.dockerfile
-      build_context: .
-      build_stage: null
-      credentials: null
-      username: null
-      provider_id: gp_01M77VKAAPR08PKG713GK3VJDQ
-    port: 80
-    host_port: null
-    domain: null
-    tls_enabled: false
-    env_vars:
-    - key: WORKER_PREFETCH
-      value: !Plain '10'
-    - key: WORKER_RECONNECT_DELAY
-      value: !Plain '5'
-    env_comments: []
-    volumes: []
-    healthcheck:
-      kind: None
-      interval_secs: 5
-      timeout_secs: 3
-      retries: 10
-      start_period_secs: 5
-    replicas: 1
-    resources:
-      cpu_shares: 0
-      mem_limit_bytes: 0
-    run_command: null
-    run_args: []
-    product: null
-    domains: []
-    pre_deploy_job_id: null
-    pre_deploy_job_ids: []
-    depends_on:
-    - svc_01M6EMRN1MDTARE52AQEMQVHRX
-    - svc_01M0EXSB8JKNG0T1M3X6MX9NN3
-    - svc_01M6GVWREEVG10460NC4HHBXEY
-    autostart: true
-    registry_auto_deploy: false
-  created_at: 2026-08-20T06:30:39.642286599Z
-  webhook_token: ENC[age:YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBQMjlRUTF4Q3IwcGwwaFhDK25nNU8vNW1YRzBqSjUrVWZlUlE5UlRhQkNnCmQ0cXBwMHhqRFJlNVN4NVNFWWI1Yjg1aVRxWnVOUG8xdFJ0QWFWUHhIdGsKLT4gWDI1NTE5IHpQdi9xalQ4ZHVUaW5VTmNiRGFJQXlJWCtHNkdJYStHdEI1c0J4TmNFaDAKNXIveDJXYmVEY1ljUkZVczdDMEpRcUdFV2JIZkYxSXFzQWFaUE5hblZwQQotPiBEcUZHL2MtZ3JlYXNlIHAkO1RIIHpOKTlcUCBBCmR3bnp1cjEyRGo2aUM2cCt5ZGcvNTNGbQotLS0gNi8zOFJ6WXdyWVZLamkremkwQjQxNFo1NWpoTUx6YUdrV3V5ZXVqZGZoSQodDmpNj1+8P8LsWBcWfA0qIiJyzL8jXXkTM5LP37bS22VXzRU8rx0L3Vc9g1DIypwkpjooUZKF4azJU3//M088UiyjqzXYJJSc1IQMQm191g==]
 jobs:
 - id: job_01M6HD5C77G605JF3AP7C0TJFT
   trigger_service_id: svc_01M6GVWREEVG10460NC4HHBXEY
@@ -586,10 +371,6 @@ secrets:
   key: VAPID_PUBLIC_KEY
   value: ENC[age:YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBjZFh3NjNTeWlIc0gxN0U0VnFyQUNtY0ZhdS9TWEErQ0lYclZZZUlqM1NvCkxwOG5PZWJ4QUhYQU5OMm9Cd2tMVGc2THJEcnlpMGZXOXZuV1JSbm51eFUKLT4gWDI1NTE5IE9XWlROZTd4cjhKajhiTFh4NlNOWlQxWWRMRWUvMzlpR1pvbjhoNHJ3VGMKNmE3ZjBMQVNIdE1LQXh0MGxNY203Sys4Z2E1ajhIUUJuQjhtYXNaZWF5SQotPiA9P1o6RzVVLWdyZWFzZSAsIFxMTkUKbHFvVDh2ZEkva241ODVZemxVVU8wb3lPVmR5VUpucGxyTjJLRkM5R1R6eURpSFZONDVvQ3cyL1ZUd0JyRk1CSgpHQjdzY1VDNHFVZ0lXRWpWCi0tLSA5bHRRdjl5eVRCS3I5TGlVak1uNGVaRU9CSGM1bnhsVGFia2U1c0pzSEJrCmdYLy/Yz6a4viq3WMa8DaE2tAMmashebpFIvz4+czSiFtNsQiCowdKs]
 service_order:
-- svc_01M0EXTN8TCQXY4N7P5AS15M7H
-- svc_01M0EXSQ24SZ2P5N6B2J3G93MB
-- svc_01M0EXT313VM1F1F38EF9GDFCS
-- svc_01M0EXV2XX91V9C30A9K6K9BMZ
 - svc_01M6EMRN1MDTARE52AQEMQVHRX
 - svc_01M6GVWREEVG10460NC4HHBXEY
 - svc_01M0EXSB8JKNG0T1M3X6MX9NN3
