@@ -337,8 +337,7 @@ services:
     product: rustfs
     domains: []
     pre_deploy_job_id: null
-    pre_deploy_job_ids:
-    - job_01M6HD5C77G605JF3AP7C0TJFT
+    pre_deploy_job_ids: []
     depends_on: []
     autostart: true
     registry_auto_deploy: false
