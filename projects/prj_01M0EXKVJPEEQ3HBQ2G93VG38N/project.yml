@@ -503,6 +503,7 @@ services:
     depends_on:
     - svc_01M6EMRN1MDTARE52AQEMQVHRX
     - svc_01M0EXSB8JKNG0T1M3X6MX9NN3
+    - svc_01M6GVWREEVG10460NC4HHBXEY
     autostart: true
     registry_auto_deploy: false
   created_at: 2026-08-20T06:30:39.642286599Z
