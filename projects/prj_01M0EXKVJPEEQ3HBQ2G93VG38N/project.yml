@@ -477,7 +477,7 @@ services:
       build_stage: null
       credentials: null
       username: null
-      provider_id: gp_01M6GZF068WC9YN2J2S1FAHX6F
+      provider_id: gp_01M77VKAAPR08PKG713GK3VJDQ
     port: 80
     host_port: null
     domain: null
