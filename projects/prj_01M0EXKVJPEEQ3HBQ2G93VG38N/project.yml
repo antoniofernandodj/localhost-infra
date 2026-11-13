@@ -89,6 +89,7 @@ services:
         services:
           rp_broker:
             image: rabbitmq:4-management
+            hostname: rp-broker
             restart: unless-stopped
             environment:
               RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
@@ -100,14 +101,10 @@ services:
           rabbitmqdata:
       ingress_service: null
     port: 5672
-    host_port: 20001
+    host_port: 20003
     domain: null
     tls_enabled: false
-    env_vars:
-    - key: RABBITMQ_DEFAULT_PASS
-      value: !Secret RABBITMQ_DEFAULT_PASS
-    - key: RABBITMQ_DEFAULT_USER
-      value: !Plain rabbit
+    env_vars: []
     env_comments: []
     volumes: []
     healthcheck:
@@ -280,7 +277,7 @@ services:
           rustfsdata:
       ingress_service: null
     port: 9000
-    host_port: null
+    host_port: 20002
     domain: null
     tls_enabled: false
     env_vars:
