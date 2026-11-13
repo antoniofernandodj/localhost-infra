@@ -7,27 +7,3 @@ providers:
   account_login: antoniofernandodj
   account_avatar: https://avatars.githubusercontent.com/u/96031071?v=4
   created_at: 2026-11-12T12:26:54.017509360Z
-- id: gp_01M7AP9ZS3DVHHCD2D2EPXC6W2
-  kind: github
-  name: Recuperação
-  base_url: https://github.com
-  auth_mode: pat
-  account_login: antoniofernandodj
-  account_avatar: https://avatars.githubusercontent.com/u/96031071?v=4
-  created_at: 2026-11-13T14:52:08.665898829Z
-- id: gp_01M7APS26MN9R27Y9KWD1RHA00
-  kind: github
-  name: Recuperação
-  base_url: https://github.com
-  auth_mode: pat
-  account_login: antoniofernandodj
-  account_avatar: https://avatars.githubusercontent.com/u/96031071?v=4
-  created_at: 2026-11-13T15:00:22.763939939Z
-- id: gp_01M7AVEX13WJNEE5WY3R69EH4J
-  kind: github
-  name: Recuperação
-  base_url: https://github.com
-  auth_mode: pat
-  account_login: antoniofernandodj
-  account_avatar: https://avatars.githubusercontent.com/u/96031071?v=4
-  created_at: 2026-11-13T16:22:12.565099795Z
