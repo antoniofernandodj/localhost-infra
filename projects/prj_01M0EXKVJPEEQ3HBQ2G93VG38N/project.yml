@@ -131,6 +131,15 @@ services:
     registry_auto_deploy: false
   compose_project: rp_01m0exsb_broker
   created_at: 2026-08-20T06:29:56.626940611Z
+  backup:
+    policy:
+      enabled: true
+      recurrence: !Daily
+        hour: 3
+        minute: 0
+      keep: 7
+      stop: true
+    since: 2026-11-13T12:43:23.447779049Z
 - id: svc_01M0EXR53EDJN5YMAF930BZZPZ
   spec:
     name: cache
