@@ -217,7 +217,7 @@ services:
           pgdata:
       ingress_service: null
     port: 5432
-    host_port: 20000
+    host_port: 20001
     domain: null
     tls_enabled: false
     env_vars: []
