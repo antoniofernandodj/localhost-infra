@@ -106,6 +106,9 @@ services:
     - host_port: 20005
       container_port: 15672
       label: painel
+    - host_port: 20007
+      container_port: 15692
+      label: métricas
     domain: null
     tls_enabled: false
     env_vars: []
