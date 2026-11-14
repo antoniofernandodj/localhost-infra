@@ -116,6 +116,9 @@ services:
     - host_port: 20010
       container_port: 5671
       label: AMQPS
+    - host_port: 20011
+      container_port: 4369
+      label: epmd (cluster)
     domain: null
     tls_enabled: false
     env_vars: []
