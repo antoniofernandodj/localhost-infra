@@ -99,7 +99,7 @@ services:
           rabbitmqdata:
       ingress_service: null
     port: 5672
-    host_port: null
+    host_port: 20009
     tcp_ports:
     - host_port: 20005
       container_port: 15672
@@ -110,6 +110,12 @@ services:
     - host_port: 20008
       container_port: 15691
       label: métricas TLS
+    - host_port: 20009
+      container_port: 5672
+      label: AMQP
+    - host_port: 20010
+      container_port: 5671
+      label: AMQPS
     domain: null
     tls_enabled: false
     env_vars: []
