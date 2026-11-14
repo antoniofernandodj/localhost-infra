@@ -100,6 +100,12 @@ services:
       ingress_service: null
     port: 5672
     host_port: 20003
+    tcp_ports:
+    - host_port: 20003
+      container_port: null
+    - host_port: 20000
+      container_port: 15672
+      label: painel
     domain: null
     tls_enabled: false
     env_vars: []
