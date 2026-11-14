@@ -99,16 +99,17 @@ services:
           rabbitmqdata:
       ingress_service: null
     port: 5672
-    host_port: 20003
+    host_port: null
     tcp_ports:
-    - host_port: 20003
-      container_port: null
     - host_port: 20005
       container_port: 15672
       label: painel
     - host_port: 20007
       container_port: 15692
       label: métricas
+    - host_port: 20008
+      container_port: 15691
+      label: métricas TLS
     domain: null
     tls_enabled: false
     env_vars: []
